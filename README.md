@@ -1,5 +1,7 @@
 # Zabbix template for Shelly 2.5 IoT Device
 
+![image](https://github.com/user-attachments/assets/62161f49-12fe-41ca-a845-cff9441d12f1)
+
 ## Import Steps
 
 1. Save the template XML file to your computer
@@ -63,5 +65,4 @@ This template will monitor the following aspects of your Shelly device:
 - Relay status (on/off)
 - Relay overpower protection status
 
-![image](https://github.com/user-attachments/assets/62161f49-12fe-41ca-a845-cff9441d12f1)
 
