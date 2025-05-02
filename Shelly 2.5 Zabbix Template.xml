@@ -563,6 +563,112 @@ last(//shelly.relay2_energy_total)</params>
                     </master_item>
                 </item>
             </items>
+            <dashboards>
+                <dashboard>
+                    <uuid>66e10f6e71334b188ad5c0ba64213d0a</uuid>
+                    <name>Shelly device</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>honeycomb</type>
+                                    <name>Power usage</name>
+                                    <width>24</width>
+                                    <height>3</height>
+                                    <fields>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>items.0</name>
+                                            <value>Energy Total</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>items.1</name>
+                                            <value>Relay 1 Power</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>items.2</name>
+                                            <value>Relay 2 Power</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>primary_label</name>
+                                            <value>{HOST.NAME}
+{ITEM.NAME}</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>FGFZB</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>honeycomb</type>
+                                    <name>Relay status</name>
+                                    <x>24</x>
+                                    <width>24</width>
+                                    <height>3</height>
+                                    <fields>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>items.0</name>
+                                            <value>Relay 1 Status</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>items.1</name>
+                                            <value>Relay 2 Status</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>primary_label</name>
+                                            <value>{HOST.NAME}
+{ITEM.NAME}</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>PFYBG</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>honeycomb</type>
+                                    <name>General</name>
+                                    <x>48</x>
+                                    <width>24</width>
+                                    <height>3</height>
+                                    <fields>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>items.0</name>
+                                            <value>Temperature Celsius</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>items.1</name>
+                                            <value>Voltage</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>primary_label</name>
+                                            <value>{HOST.NAME}
+{ITEM.NAME}</value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>FIPGR</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
         </template>
     </templates>
 </zabbix_export>
