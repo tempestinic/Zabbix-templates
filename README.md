@@ -62,3 +62,6 @@ This template will monitor the following aspects of your Shelly device:
 ### Relays
 - Relay status (on/off)
 - Relay overpower protection status
+
+![image](https://github.com/user-attachments/assets/62161f49-12fe-41ca-a845-cff9441d12f1)
+
