@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.2</version>
+    <template_groups>
+        <template_group>
+            <uuid>36bff6c29af64692839d077febfc7079</uuid>
+            <name>Templates/Network devices</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>a88a2d31ef704f77ba6fcfbbb90a42be</uuid>
+            <template>Shelly 2.5</template>
+            <name>Shelly 2.5</name>
+            <description>Template for monitoring Shelly smart relay devices.
+Supported models: Shelly 2.5</description>
+            <groups>
+                <group>
+                    <name>Templates/Network devices</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>1ab8a2e637b84b1490d868dc9ea9444f</uuid>
+                    <name>Cloud Connected</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.cloud_connected</key>
+                    <value_type>TEXT</value_type>
+                    <description>Cloud connection status</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.cloud.connected</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>8acc41bcad6147ff9d120696835aeab5</uuid>
+                    <name>Cloud Enabled</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.cloud_enabled</key>
+                    <value_type>TEXT</value_type>
+                    <description>Cloud Enabled status</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.cloud.enabled</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>eb020d3a733c4001a4af4f5e706a714b</uuid>
+                    <name>Current Version</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.current_version</key>
+                    <value_type>TEXT</value_type>
+                    <description>Current firmware version</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.update.old_version</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>faeb580d7f7d437ba75e2e386054ad3a</uuid>
+                    <name>Energy Total</name>
+                    <type>CALCULATED</type>
+                    <key>shelly.energy_total</key>
+                    <value_type>FLOAT</value_type>
+                    <trends>0</trends>
+                    <units>Wh</units>
+                    <params>last(//shelly.relay1_energy_total) +
+last(//shelly.relay2_energy_total)</params>
+                    <description>Total energy consumption on relay 1</description>
+                </item>
+                <item>
+                    <uuid>44ea90edd7b84ccb9b9fda8feb7eb889</uuid>
+                    <name>Has Update</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.has_update</key>
+                    <value_type>TEXT</value_type>
+                    <description>Firmware update available</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.has_update</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>44e02300e75b439887b8b5ef1382feb4</uuid>
+                    <name>MQTT Connected</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.mqtt_connected</key>
+                    <value_type>TEXT</value_type>
+                    <description>MQTT connection status</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.mqtt.connected</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>6e9cc6aa4d0640049b8cf02a64945e30</uuid>
+                    <name>Overtemperature</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.overtemperature</key>
+                    <value_type>TEXT</value_type>
+                    <description>Temperature exceeds safe operating limits</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.overtemperature</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>9d1917a2078c4ed191e4907f6d8da4fa</uuid>
+                    <name>Relay 1 Energy Total</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay1_energy_total</key>
+                    <value_type>FLOAT</value_type>
+                    <trends>0</trends>
+                    <units>Wh</units>
+                    <description>Total energy consumption on relay 1</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.meters[0].total</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.0167</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>06df11800ae94151a6bf4bdc3080002f</uuid>
+                    <name>Relay 1 Overpower</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay1_overpower</key>
+                    <value_type>TEXT</value_type>
+                    <description>Relay 1 overpower protection triggered</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.relays[0].overpower</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>16bbb85c66fb463284e4ea06e3b3e114</uuid>
+                    <name>Relay 1 Power</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay1_power</key>
+                    <value_type>FLOAT</value_type>
+                    <trends>0</trends>
+                    <units>W</units>
+                    <description>Power consumption on relay 1</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.meters[0].power</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>66f45c668834467f9117d17f95834f6c</uuid>
+                    <name>Relay 1 Status</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay1_status</key>
+                    <value_type>CHAR</value_type>
+                    <description>Relay 1 on/off status</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.relays[0].ison</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>true</parameter>
+                                <parameter>ON</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>false</parameter>
+                                <parameter>OFF</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>4b3e95d6823b41958bfcd80c2293ed6f</uuid>
+                    <name>Relay 2 Energy Total</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay2_energy_total</key>
+                    <value_type>FLOAT</value_type>
+                    <trends>0</trends>
+                    <units>Wh</units>
+                    <description>Total energy consumption on relay 2</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.meters[1].total</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.0167</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>044c2edc248146dd81c6aa20a3cb34d4</uuid>
+                    <name>Relay 2 Overpower</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay2_overpower</key>
+                    <value_type>TEXT</value_type>
+                    <description>Relay 2 overpower protection triggered</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.relays[1].overpower</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>c9508335d34c422fb232936243b9b828</uuid>
+                    <name>Relay 2 Power</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay2_power</key>
+                    <value_type>FLOAT</value_type>
+                    <trends>0</trends>
+                    <units>W</units>
+                    <description>Power consumption on relay 2</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.meters[1].power</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>3d8e26a24e764c5fbac6434daefa275e</uuid>
+                    <name>Relay 2 Status</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.relay2_status</key>
+                    <value_type>CHAR</value_type>
+                    <description>Relay 2 on/off status</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.relays[1].ison</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>true</parameter>
+                                <parameter>ON</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>false</parameter>
+                                <parameter>OFF</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>01789f27f9cc467798d5ad4e6018c60b</uuid>
+                    <name>Device Settings</name>
+                    <type>HTTP_AGENT</type>
+                    <key>shelly.settings</key>
+                    <history>1d</history>
+                    <value_type>TEXT</value_type>
+                    <description>Full device status in JSON format</description>
+                    <url>http://{HOST.CONN}/settings</url>
+                </item>
+                <item>
+                    <uuid>6d051ef53a7e420182ec5730f46a5878</uuid>
+                    <name>Device Status</name>
+                    <type>HTTP_AGENT</type>
+                    <key>shelly.status</key>
+                    <history>1d</history>
+                    <value_type>TEXT</value_type>
+                    <description>Full device status in JSON format</description>
+                    <url>http://{HOST.CONN}/status</url>
+                </item>
+                <item>
+                    <uuid>ba320b73b84342a98b02a73bef58bba2</uuid>
+                    <name>Temperature Celsius</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.temperature_c</key>
+                    <value_type>FLOAT</value_type>
+                    <units>°C</units>
+                    <description>Device temperature in Celsius</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.tmp.tC</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>4c62de2ad11d49b69fef2416d76a8007</uuid>
+                    <name>Temperature Fahrenheit</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.temperature_f</key>
+                    <value_type>FLOAT</value_type>
+                    <units>°F</units>
+                    <description>Device temperature in Fahrenheit</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.tmp.tF</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>c2f6aa5a43f3479b84cc651d6554df04</uuid>
+                    <name>Temperature Status</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.temperature_status</key>
+                    <value_type>TEXT</value_type>
+                    <description>Device temperature status</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.temperature_status</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>50bc130e21554807be704f0dff90b81f</uuid>
+                    <name>Device uptime</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.uptime</key>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <description>Device uptime in seconds</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.uptime</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>7dbd1e3c1bfc44a6abf91a905b802d64</uuid>
+                    <name>Voltage</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.voltage</key>
+                    <value_type>FLOAT</value_type>
+                    <units>V</units>
+                    <description>Input voltage</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.voltage</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>6c189f375dff432da0526e38e2fb103d</uuid>
+                    <name>WiFi Connected</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.wifi_connected</key>
+                    <value_type>TEXT</value_type>
+                    <description>WiFi connection status</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.wifi_sta.connected</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>59cece5941f444b29abf37c54d1e84e0</uuid>
+                    <name>WiFi IP Address</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.wifi_ip</key>
+                    <value_type>TEXT</value_type>
+                    <description>WiFi IP address</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.wifi_sta.ip</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>e18fb76b858747d59078393ffe93cbf6</uuid>
+                    <name>WiFi MAC Address</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.wifi_mac</key>
+                    <value_type>TEXT</value_type>
+                    <description>WiFi MAC address</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.mac</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>33952693c93b4a86aeeca15987d680eb</uuid>
+                    <name>WiFi RSSI</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.wifi_rssi</key>
+                    <value_type>FLOAT</value_type>
+                    <trends>0</trends>
+                    <units>dBm</units>
+                    <description>WiFi signal strength</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.wifi_sta.rssi</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>1c39878cacc740bcaad7c6c656a8a01a</uuid>
+                    <name>WiFi SSID</name>
+                    <type>DEPENDENT</type>
+                    <key>shelly.wifi_ssid</key>
+                    <value_type>TEXT</value_type>
+                    <description>WiFi SSID name</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.wifi_sta.ssid</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>shelly.status</key>
+                    </master_item>
+                </item>
+            </items>
+        </template>
+    </templates>
+</zabbix_export>
